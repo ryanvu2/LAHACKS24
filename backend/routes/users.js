@@ -1,4 +1,5 @@
 const express = require('express')
+const User = require('../models/userModel')
 const router = express.Router()
 
 //get user
@@ -10,8 +11,15 @@ router.get('/:id', (req,res)=>{
     res.json({mssg: "GET SINGLE USER"})
 })
 // get single user
-router.post('/', (req,res)=>{
-    res.json({mssg: "POST NEW USER"})
+router.post('/', async(req,res)=>{
+    const {firstName, lastName, currJournal, journalHistory, usersDoctors} = req.body
+
+    try{
+        const user = await User.create({firstName, lastName, currJournal, journalHistory, usersDoctors})
+        res.status(200).json(user)
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 })
 // DELETE A USER
 router.delete('/:id', (req,res)=>{
