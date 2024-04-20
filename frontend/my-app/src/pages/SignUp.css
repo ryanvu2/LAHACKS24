@@ -1,0 +1,40 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 80vh;
+    justify-content: space-around; /* Distributes space between inputs */
+    align-items: center; /* Centers the inputs horizontally */
+    background: #fff; /* Background color */
+    padding: 20px; /* Padding around the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.signup-form input, .signup-form select, .signup-form button {
+    width: 90%; /* Makes inputs take up most of the form width */
+    padding: 10px;
+    margin: 10px 0; /* Adds space between inputs */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded borders for inputs */
+}
+
+.signup-form select {
+    -webkit-appearance: none; /* Removes default style of select dropdown */
+    /* background-image: url('dropdown-icon.png'); Add a custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+option {
+    background: white; /* Background color for dropdown options */
+    border-radius: 50%; /* Makes images circular */
+}
