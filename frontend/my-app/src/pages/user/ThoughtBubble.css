@@ -54,7 +54,7 @@ body {
   width: 500px;  /* Large size to make it prominent */
   height: 500px; /* Aspect ratio maintained for aesthetic */
   animation-name: oscillate;
-  animation-delay: 1s;
+  animation-delay: 2s;
 }
 
 .thought-textarea {
