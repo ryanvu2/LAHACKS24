@@ -1,14 +1,22 @@
 /* ThoughtBubble.css */
 
 body {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-image: url('/Users/tomohto/LAHACKS24/frontend/my-app/public/THOUGHTBACK.jpeg'); /* Path to your background image */
-  background-size: cover; /* Cover the entire viewport without stretching */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
+  margin: 0;
+  /* Remove default margin */
+  padding: 0;
+  /* Remove default padding */
+  height: 100vh;
+  /* Full viewport height */
+  width: 100vw;
+  /* Full viewport width */
+  background-image: url('/Users/farrelgomargana/LAHACKS24/frontend/my-app/public/THOUGHTBACK.jpeg');
+  /* Path to your background image */
+  background-size: cover;
+  /* Cover the entire viewport without stretching */
+  background-position: center;
+  /* Center the background image */
+  background-repeat: no-repeat;
+  /* Prevent the image from repeating */
 }
 
 .thought-bubble-container {
@@ -16,8 +24,10 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100vw; /* Use the full viewport width */
-  height: 100vh; /* Use the full viewport height */
+  width: 100vw;
+  /* Use the full viewport width */
+  height: 100vh;
+  /* Use the full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,19 +57,24 @@ body {
   left: 30%;
   bottom: 15%;
   animation-name: oscillate;
-  animation-delay: 1s; /* Delay to desynchronize the animations */
+  animation-delay: 1s;
+  /* Delay to desynchronize the animations */
 }
 
 .big-bubble {
-  width: 500px;  /* Large size to make it prominent */
-  height: 500px; /* Aspect ratio maintained for aesthetic */
+  width: 500px;
+  /* Large size to make it prominent */
+  height: 500px;
+  /* Aspect ratio maintained for aesthetic */
   animation-name: oscillate;
   animation-delay: 1s;
 }
 
 .thought-textarea {
-  width: 350px; /* Relative to parent (big-bubble) */
-  height: 350px; /* Making the text area large enough for entries */
+  width: 350px;
+  /* Relative to parent (big-bubble) */
+  height: 350px;
+  /* Making the text area large enough for entries */
   position: absolute;
   left: 50%;
   top: 50%;
@@ -70,15 +85,20 @@ body {
   border-radius: 10px;
   padding: 10px;
   font-size: 16px;
-  resize: none; /* Disable resizing of the textarea */
+  resize: none;
+  /* Disable resizing of the textarea */
   outline: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* subtle shadow for depth */
 }
 
 @keyframes oscillate {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
