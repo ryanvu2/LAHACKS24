@@ -1,0 +1,71 @@
+/* HomePage.css */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .card {
+    width: 80vw;
+    height: 80vh;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: auto; /* Makes the card content scrollable */
+    padding: 20px; /* Adds some padding inside the card */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the items horizontally */
+  }
+  
+  .client-list {
+    width: 100%;
+    list-style: none; /* Removes default list styling */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Set the list to display items horizontally */
+    flex-wrap: wrap; /* Allows items to wrap onto the next line if there's not enough space */
+    justify-content: space-around; /* Distributes space between and around items */
+  }
+  
+  .client-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content vertically and horizontally */
+    margin: 30px; /* Provides spacing between client items */
+  }
+  
+  .profile-pic {
+    width: 100px; /* Fixed size for the circle */
+    height: 100px;
+    border-radius: 50%; /* Makes the div a circle */
+    background-color: #ccc; /* Placeholder color, replace with an image if needed */
+    background-size: cover;
+    background-position: center;
+    /* background-image: url('https://media.istockphoto.com/id/1386479313/photo/happy-millennial-afro-american-business-woman-posing-isolated-on-white.jpg?s=612x612&w=0&k=20&c=8ssXDNTp1XAPan8Bg6mJRwG7EXHshFO5o0v9SIj96nY='); */
+  }
+  
+  .client-name {
+    margin-top: 10px;
+    font-size: 16px; /* Set the font size for the client's name */
+    color: #333; /* Text color */
+  }
+
+  .profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  padding: 0;
+  outline: none; /* Removes the default focus outline */
+}
+
+.docHomeHeader{
+    color: black;
+}
+  
