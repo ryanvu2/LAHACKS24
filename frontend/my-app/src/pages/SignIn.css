@@ -39,7 +39,7 @@ button {
 
 /* Since these selectors were targeting the nth-child, they might not be applicable anymore.
 You may need to assign classes or ids to target these buttons specifically. */
-button:nth-child(1) {
+/* button:nth-child(1) {
     background-color: #3b5998;
 }
 
@@ -51,7 +51,7 @@ button:nth-child(3) {
     background-color: #fff;
     color: #000;
     border: 1px solid #ddd;
-}
+} */
 
 button[type="submit"] {
     background-color: #c8a2c8; /* MindScope purple */
