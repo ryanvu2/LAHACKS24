@@ -109,3 +109,33 @@ html, body {
   fill: white; /* Change SVG color to white */
 }
 
+/* HomePage.css */
+
+/* Normal state of calendar tiles */
+.react-calendar__tile {
+  background-color: white; /* All dates are white by default */
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #f0f0f0;
+}
+
+/* Hover state */
+.react-calendar__tile:hover {
+  background-color: #EDE7F6; /* Light purple background on hover */
+}
+
+/* Active (selected) state */
+.react-calendar__tile--active {
+  background-color: #D1C4E9; /* Slightly darker purple for selected date */
+}
+
+/* Today's date styling if needed */
+.react-calendar__tile--now {
+  background-color: white; /* Keeps today's date white unless it's selected or hovered over */
+}
+
+.react-calendar__tile--now:hover,
+.react-calendar__tile--now.react-calendar__tile--active {
+  background-color: #D1C4E9; /* Ensure today's date also shows purple when active or hovered */
+}
+
