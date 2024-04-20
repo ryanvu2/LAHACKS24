@@ -1,0 +1,98 @@
+/* SignIn.css */
+body,html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+form {
+    width: 1000 !important; /* Increased from 300px to 480px */
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-right: 85px;
+    padding-left: 85px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3); /* Stronger shadow */
+}
+
+h1 {
+    color: #c8a2c8;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Since these selectors were targeting the nth-child, they might not be applicable anymore.
+You may need to assign classes or ids to target these buttons specifically. */
+button:nth-child(1) {
+    background-color: #3b5998;
+}
+
+button:nth-child(2) {
+    background-color: #000;
+}
+
+button:nth-child(3) {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+button[type="submit"] {
+    background-color: #c8a2c8; /* MindScope purple */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin: 20px 0;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px); /* Adjust as needed based on padding */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+}
