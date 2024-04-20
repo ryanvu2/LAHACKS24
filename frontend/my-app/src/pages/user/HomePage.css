@@ -1,0 +1,111 @@
+/* Calendar.css */
+
+/* Reset padding and margin for the entire document */
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* React Calendar styles */
+.react-calendar {
+  width: 100%; /* Calendar takes full width of its container */
+  max-width: 100%; /* Ensure calendar doesn't exceed the container width */
+  border: none;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.125em;
+}
+
+.react-calendar__navigation {
+  background-color: #662d91;
+  color: white;
+  padding: 10px 0;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+}
+
+.react-calendar__month-view__weekdays,
+.react-calendar__month-view__days__day {
+  text-align: center;
+  color: #662d91;
+  font-weight: bold;
+}
+
+.react-calendar__tile {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px; /* Increase padding to make the tiles bigger */
+}
+
+.react-calendar__tile--now {
+  background-color: #ffeced;
+}
+
+.react-calendar__tile--active {
+  background-color: #662d91;
+  color: white;
+}
+
+/* Hide days from other months */
+.not-current-month {
+  visibility: hidden;
+}
+
+/* Calendar container */
+.calendar-container {
+  display: flex; /* Flex to center the calendar horizontally */
+  justify-content: center;
+  align-items: flex-start; /* Align to the top, remove if the calendar should be vertically centered */
+  min-height: 100vh; /* Container takes at least the full height of the viewport */
+  width: 80%; /* Container takes full width */
+  margin: 0 auto; /* Center the container */
+  padding: 0;
+   /* Remove box shadow or adjust as needed */
+}
+
+.custom-calendar-header {
+  background-color: #6A1B9A;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+.custom-calendar
+{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Target the navigation header */
+.react-calendar__navigation {
+  background-color: #662d91; /* Adjust the background color if needed */
+  color: white; /* Set text color to white */
+}
+
+/* Target the buttons specifically if they need different styling */
+.react-calendar__navigation button {
+  color: white; /* Ensure buttons (arrows) are white */
+  background: none;
+  border: none;
+  font-size: 1rem;
+}
+
+/* Target the navigation label (month and year) */
+.react-calendar__navigation__label {
+  color: white; /* Set text color to white */
+  font-size: 1.2rem; /* Adjust the size as needed */
+}
+
+/* Optionally, if the buttons use SVGs for arrows, target the SVG specifically */
+.react-calendar__navigation button svg {
+  fill: white; /* Change SVG color to white */
+}
+
