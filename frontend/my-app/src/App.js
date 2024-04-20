@@ -5,6 +5,7 @@ import SignInPage from './pages/SignIn'
 import MyCalendar from './pages/user/HomePage'
 import ThoughtBubble from './pages/user/Thoughts'
 import Charts from './pages/doctor/Charts'
+import Questionnaire from './pages/user/Questions'
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
     // <MyCalendar/>
     // <ThoughtBubble/>
     // <DocHome/>
-    <Charts/>
+    // <Charts/>
+    <Questionnaire/>
   );
 }
 
