@@ -9,7 +9,7 @@ body {
   /* Full viewport height */
   width: 100vw;
   /* Full viewport width */
-  background-image: url('/Users/farrelgomargana/LAHACKS24/frontend/my-app/public/THOUGHTBACK.jpeg');
+  background-image: url('/Users/ryanvu/LAHACKS24/frontend/my-app/public/THOUGHTBACK.jpeg');
   /* Path to your background image */
   background-size: cover;
   /* Cover the entire viewport without stretching */
@@ -17,6 +17,7 @@ body {
   /* Center the background image */
   background-repeat: no-repeat;
   /* Prevent the image from repeating */
+
 }
 
 .thought-bubble-container {
