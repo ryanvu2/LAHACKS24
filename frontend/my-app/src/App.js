@@ -10,9 +10,9 @@ import Charts from './pages/doctor/Charts'
 function App() {
   return (
     // <MyCalendar/>
-    // <ThoughtBubble/>
+     <ThoughtBubble/>
     // <DocHome/>
-    <Charts/>
+    //<Charts/>
   );
 }
 
