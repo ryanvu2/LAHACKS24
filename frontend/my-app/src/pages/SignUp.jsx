@@ -4,6 +4,14 @@ import './SignUp.css';
 
 function SignUp() {
     const [selectedPic, setSelectedPic] = useState(null);
+    const [role, setRole] = useState("");
+    const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: ''
+    });
+    const [errors, setErrors] = useState({});
 
     // Options for react-select
     const profilePics = [
@@ -22,23 +30,72 @@ function SignUp() {
         </div>
     );
 
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        let formErrors = {};
+
+        // Check each field for empty values and set an error message
+        Object.entries(formData).forEach(([key, value]) => {
+            if (!value) formErrors[key] = 'This field is required';
+        });
+
+        if (!selectedPic) formErrors.selectedPic = 'Please select a profile picture.';
+        if (!role) formErrors.role = 'Please select a role.';
+
+        setErrors(formErrors);
+
+        // Check if there are no errors before proceeding
+        if (Object.keys(formErrors).length === 0) {
+            console.log('Form data:', formData);
+            console.log('Selected Picture:', selectedPic);
+            console.log('Role:', role);
+            // Proceed with form submission logic here
+        }
+    };
+
     return (
         <div className="form-container">
-            <form className="signup-form">
+            <form className="signup-form" onSubmit={handleSubmit}>
                 <h1>Sign Up</h1>
-                <input type="text" name="username" placeholder="Username" required />
-                <input type="password" name="password" placeholder="Password" required />
-                <input type="text" name="firstName" placeholder="First Name" required />
-                <input type="text" name="lastName" placeholder="Last Name" required />
+                <input type="text" name="username" placeholder="Username" required
+                       value={formData.username} onChange={handleInputChange} />
+                {errors.username && <p>{errors.username}</p>}
+                <input type="password" name="password" placeholder="Password" required
+                       value={formData.password} onChange={handleInputChange} />
+                {errors.password && <p>{errors.password}</p>}
+                <input type="text" name="firstName" placeholder="First Name" required
+                       value={formData.firstName} onChange={handleInputChange} />
+                {errors.firstName && <p>{errors.firstName}</p>}
+                <input type="text" name="lastName" placeholder="Last Name" required
+                       value={formData.lastName} onChange={handleInputChange} />
+                {errors.lastName && <p>{errors.lastName}</p>}
 
-                <Select 
-                    options={profilePics}
-                    value={selectedPic}
-                    onChange={setSelectedPic}
-                    formatOptionLabel={formatOptionLabel}
-                    isSearchable={false} // Optional: Disables searching, simplifying the select box
-                />
-
+                <div className="selection-with-error">
+                    <Select
+                        options={profilePics}
+                        value={selectedPic}
+                        onChange={setSelectedPic}
+                        formatOptionLabel={formatOptionLabel}
+                        isSearchable={false}
+                    />
+                    {errors.selectedPic && <p className="error-message">{errors.selectedPic}</p>}
+                </div>
+                <div className="selection-with-error">
+                    <div className="role-selection">
+                        <button type="button"
+                                className={`role-button ${role === "Doctor" ? "active" : ""}`}
+                                onClick={() => setRole("Doctor")}>Doctor</button>
+                        <button type="button"
+                                className={`role-button ${role === "User" ? "active" : ""}`}
+                                onClick={() => setRole("User")}>User</button>
+                    </div>
+                    {errors.role && <p className="error-message">{errors.role}</p>}
+                </div>
                 <button type="submit">Sign Up</button>
             </form>
         </div>

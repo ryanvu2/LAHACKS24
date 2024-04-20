@@ -38,3 +38,38 @@ option {
     background: white; /* Background color for dropdown options */
     border-radius: 50%; /* Makes images circular */
 }
+
+.role-selection{
+    display: flex;
+    justify-content: space-between;
+}
+
+.role-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    color: black;
+}
+
+.role-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.selection-with-error {
+    display: flex;
+    align-items: center; /* Vertically aligns items in the center */
+    justify-content: center; /* Distributes space between select and error message */
+    width: 100%; /* Full width to accommodate both elements */
+}
+
+.error-message {
+    color: red; /* Error message color */
+    margin-left: 10px; /* Space between select box and error message */
+}
+
