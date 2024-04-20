@@ -11,14 +11,13 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    currJournal: {
-        type: Number
+    questAns: {
+        type: Map,
+        of: String
     },
-    journalHistory: {
-        type: Array
-    },
-    usersDoctors: {
-        type: Array
+    textAns: {
+        type: Map,
+        of: String
     }
 }, {timestamps: true}) //tracks when it was made and edited
 
