@@ -19,7 +19,8 @@ function App() {
         <Route path="/" element={<SignInPage />} />
         <Route path ="/signup" element = {<SignUp/>}/>
         <Route path="/charts" element={<Charts />} />
-        <Route path="/questionnaire" element={<Questionnaire />} />
+        <Route path="/questionnaire/:date" element={<Questionnaire />} />
+
       </Routes>
     </Router>
   );

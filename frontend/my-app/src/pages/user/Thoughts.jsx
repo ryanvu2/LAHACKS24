@@ -11,6 +11,17 @@ const ThoughtBubble = () => {
     const [text, setText] = useState('');
     const userId = "66240a210a2fda00fd163212";
 
+    const formatDate = (dateStr) => {
+        const [month, day] = dateStr.split('-').map(Number); // Convert 'MM-DD' to numbers
+        const dateObj = new Date(new Date().getFullYear(), month - 1, day); // Months are 0-indexed in JS Date
+        return dateObj;
+    };
+
+    const getFormattedDate = (dateStr) => {
+        const dateObj = formatDate(dateStr);
+        return dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+    };
+
     useEffect(() => {
         const fetchText = async () => {
             try {
@@ -38,20 +49,22 @@ const ThoughtBubble = () => {
         navigate('/calendar')
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         console.log('Submit button clicked');
         try {
-            await axios.post(`/api/users/${userId}/textAns/${date}`, { text });
-            console.log('Text updated successfully!');
+            axios.post(`/api/users/${userId}/textAns/${date}`, { text })
+                 .then(response => {
+                     console.log('Text updated successfully!');
+                     navigate(`/questionnaire/${date}`); // Pass date to Questionnaire
+                 });
         } catch (error) {
             console.error('Failed to update text:', error);
         }
-        navigate(`/questionnaire`);  // Navigate to ThoughtBubble page
     };
 
     return (
         <div className="thought-bubble-container">
-            <h2 className="bubbleHeader">Entry for {date}</h2>
+            <h2 className="bubbleHeader">{getFormattedDate(date)}</h2>
             <div className="bubble small-bubble1"></div>
             <div className="bubble small-bubble2"></div>
             <div className="bubble big-bubble">
