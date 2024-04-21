@@ -96,7 +96,7 @@ Journal Entry: ${journal}
   });
 
   const response = result.response;
-  console.log(response.text());
+  return(response.text());
 }
 
-run();
+module.exports = {run};
