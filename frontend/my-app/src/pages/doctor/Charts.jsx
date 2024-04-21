@@ -86,7 +86,7 @@ function Charts() {
         <div>
             <button className="logout-button" onClick={handleLogout}>Back</button>
             <div className="card">
-                <h1>{`${user.firstName} ${user.lastName}'s Report`}</h1>
+                <h1><font color="black">{`${user.firstName} ${user.lastName}'s Report`}</font></h1>
                 <div className="chart-container">
                     <Pie data={pieData} />
                     <Line data={lineData} />
