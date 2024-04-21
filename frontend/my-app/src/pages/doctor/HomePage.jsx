@@ -13,7 +13,9 @@ function DocHome() {
         { name: "Grace Lee", picUrl: "url_to_grace's_picture.jpg" },
         { name: "Henry Garcia", picUrl: "url_to_henry's_picture.jpg" },
         { name: "Isabel Martinez", picUrl: "url_to_isabel's_picture.jpg" },
-        { name: "John Doe", picUrl: "url_to_john's_picture.jpg" }
+        { name: "John Doe", picUrl: "url_to_john's_picture.jpg" },
+        { name: "Katherine Mills", picUrl: "url_to_john's_picture.jpg" },
+        { name: "Logan Turner", picUrl: "url_to_john's_picture.jpg" },
     ];
     
     const navigate = useNavigate();
