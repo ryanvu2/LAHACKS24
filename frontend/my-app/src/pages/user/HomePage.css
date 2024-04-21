@@ -20,6 +20,7 @@ html, body {
   border: none;
   font-family: 'Arial', sans-serif;
   line-height: 1.125em;
+  border-radius: 10px;
 }
 
 .react-calendar__navigation {
@@ -32,6 +33,7 @@ html, body {
   background: none;
   border: none;
   font-size: 1.25rem;
+  border-radius: 10px;
 }
 
 .react-calendar__month-view__weekdays,
@@ -64,12 +66,14 @@ html, body {
 /* Calendar container */
 .calendar-container {
   display: flex; /* Flex to center the calendar horizontally */
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start; /* Align to the top, remove if the calendar should be vertically centered */
+  align-items: center; /* Align to the top, remove if the calendar should be vertically centered */
   min-height: 100vh; /* Container takes at least the full height of the viewport */
   width: 80%; /* Container takes full width */
   margin: 0 auto; /* Center the container */
   padding: 0;
+  border-radius: 10px;
    /* Remove box shadow or adjust as needed */
 }
 
@@ -88,6 +92,7 @@ html, body {
 .react-calendar__navigation {
   background-color: #662d91; /* Adjust the background color if needed */
   color: white; /* Set text color to white */
+  border-radius: 10px 10px 0 0;
 }
 
 /* Target the buttons specifically if they need different styling */
@@ -107,5 +112,9 @@ html, body {
 /* Optionally, if the buttons use SVGs for arrows, target the SVG specifically */
 .react-calendar__navigation button svg {
   fill: white; /* Change SVG color to white */
+}
+
+.homeName{
+  color: white;
 }
 
