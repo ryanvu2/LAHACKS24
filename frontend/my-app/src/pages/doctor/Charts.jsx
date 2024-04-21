@@ -71,7 +71,7 @@ function Charts() {
 const preprocessOutput = (text) => {
     // const cleanedText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
     // return cleanedText.replace(/`/g, ''); // Remove backticks or other non-JSON characters
-    let pattern = /```json\n(.*?)\n```/s;
+    let pattern = /```json\n{\n(.*?)\n}\n```/s;
 
     // Use match() to find the first match of the pattern in the input text
     let match = text.match(pattern);
