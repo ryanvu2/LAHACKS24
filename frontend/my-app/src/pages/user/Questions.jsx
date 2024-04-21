@@ -33,7 +33,7 @@ function Questionnaire() {
 
     const handleSubmit = async () => {
         console.log('Submitting Answers:', answers);
-        navigate('/');
+        navigate('/calendar');
         // Here you'd make an Axios POST request
         // axios.post('http://localhost:4000/api/submit', answers)
         //     .then(response => console.log('Success:', response))

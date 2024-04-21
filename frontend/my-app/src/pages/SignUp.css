@@ -73,3 +73,6 @@ option {
     margin-left: 10px; /* Space between select box and error message */
 }
 
+.darkHeader{
+    color: black;
+}

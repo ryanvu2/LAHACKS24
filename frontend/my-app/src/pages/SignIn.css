@@ -22,7 +22,7 @@ form {
 }
 
 h1 {
-    color: #c8a2c8;
+    color: white;
     text-align: center;
 }
 
@@ -94,4 +94,8 @@ a:hover {
 p {
     text-align: center;
     margin-top: 20px;
+}
+
+.signButton{
+    background-color: #c8a2c8;
 }

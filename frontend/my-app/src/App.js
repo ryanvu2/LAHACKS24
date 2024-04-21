@@ -7,15 +7,17 @@ import MyCalendar from './pages/user/HomePage';
 import ThoughtBubble from './pages/user/Thoughts';
 import Charts from './pages/doctor/Charts';
 import Questionnaire from './pages/user/Questions';
+import SignUp from './pages/SignUp'
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MyCalendar />} />
+        <Route path="/calendar" element={<MyCalendar />} />
         <Route path="/thought/:date" element={<ThoughtBubble />} />
         <Route path="/doctor" element={<DocHome />} />
-        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/" element={<SignInPage />} />
+        <Route path ="/signup" element = {<SignUp/>}/>
         <Route path="/charts" element={<Charts />} />
         <Route path="/questionnaire" element={<Questionnaire />} />
       </Routes>
