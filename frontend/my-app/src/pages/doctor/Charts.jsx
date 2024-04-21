@@ -89,6 +89,28 @@ function Charts() {
         setIsModalOpen(true);
     };
 
+    const boxHeaders = [
+        'Integrated Thematic Analysis',
+        'Emotional and Thematic Interrelation',
+        'Subtle Shifts in Mood and Tone',
+        'Evolution of Self-Perception',
+        'Predictive Insights on Mental Health',
+        'Coping Strategy Effectiveness'
+    ];
+
+    const [isBoxModalOpen, setIsBoxModalOpen] = useState(false);
+    const [activeBoxIndex, setActiveBoxIndex] = useState(null);
+
+    const handleBoxClick = (index) => {
+        setActiveBoxIndex(index);
+        setIsBoxModalOpen(true);
+    };
+
+    const renderBoxModalContent = () => {
+        if (activeBoxIndex === null) return 'No box selected';
+        return `Information about Periodic Report ${activeBoxIndex + 1}`;
+    };
+
     return (
         <div>
             <button className="logout-button" onClick={handleLogout}>Back</button>
@@ -111,10 +133,22 @@ function Charts() {
                         className="custom-calendar"
                     />
                 </div>
+                <h2>Periodic Trends</h2>
+                <div className="scrolling-box-container">
+                {boxHeaders.map((header, index) => (
+                    <div key={index} className="scrolling-box" onClick={() => handleBoxClick(index)}>
+                        <h3 className="scrolling-box-header">{header}</h3>
+                    </div>
+                ))}
+            </div>
             </div>
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <h2>Details for {selectedDay?.toLocaleDateString()}</h2>
                 {/* You can add more content here, such as the details or logs of the selected day */}
+            </Modal>
+            <Modal isOpen={isBoxModalOpen} onClose={() => setIsBoxModalOpen(false)}>
+                <h2>{activeBoxIndex >= 0 ? boxHeaders[activeBoxIndex] : 'No Box Selected'}</h2>
+                {/* You can add more content here, such as the details or logs of the selected box */}
             </Modal>
         </div>
     );
