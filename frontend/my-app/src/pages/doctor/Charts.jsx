@@ -122,7 +122,7 @@ function Charts() {
                 <h2>{user.firstName} {user.lastName}'s Daily Logs</h2>
                 <Calendar onChange={handleDayClick} value={value} className="custom-calendar" />
             </div>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} userId={userId} date={selectedDay}>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} userId={userId} theDate={selectedDay}>
                 <h2>Details for {selectedDay}</h2>
             </Modal>
         </div>

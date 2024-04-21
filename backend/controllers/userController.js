@@ -161,8 +161,30 @@ const updateQuestAns = async (req, res) => {
 };
 
 
+const getDailyTextAns = async (req, res) => {
+    const { id, date } = req.params;
 
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: "Invalid ID provided" });
+    }
 
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: "No such user" });
+        }
+
+        const dailyAns = user.dailyTextAns.get(date);
+        if (!dailyAns) {
+            return res.status(404).json({ error: "No results found for this date" });
+        }
+
+        res.json({ date: date, dailyTextAns: dailyAns });
+    } catch (error) {
+        console.error("Error fetching daily text answers:", error);
+        res.status(500).json({ error: error.message });
+    }
+};
 module.exports = {
     createUser,
     getUsers,
@@ -171,5 +193,6 @@ module.exports = {
     updateUser,
     getSingleTextAns,
     updateTextAns,
-    updateQuestAns
+    updateQuestAns,
+    getDailyTextAns
 }

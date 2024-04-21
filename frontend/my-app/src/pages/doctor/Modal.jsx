@@ -3,27 +3,36 @@ import axios from 'axios';
 import './Modal.css';
 
 function Modal({ isOpen, onClose, userId, theDate }) {
-    const [userDetails, setUserDetails] = useState(null);
+    const [dailyTextAns, setDailyTextAns] = useState(null);
     const date = theDate;
+    const id = userId;
+    console.log("date coming in: " + date);
+    console.log("id coming in: " + id);
+
     useEffect(() => {
-        const fetchUserData = async () => {
+        console.log("UserId:", userId, "Date:", theDate);  // Log to verify that userId and theDate are set
+        const fetchDailyTextAns = async () => {
+            if (!userId || !theDate) {
+                console.log("Missing userId or theDate");  // Additional log for debugging
+                return;
+            }
+    
             try {
-                const response = await axios.get(`http://localhost:4000/api/users/${userId}`);
-                setUserDetails(response.data);
+                const url = `http://localhost:4000/api/users/${id}/getDailyTextAns/${date}`;
+                console.log("Making request to:", url);  // Log the request URL
+                const response = await axios.get(url);
+                setDailyTextAns(response.data.dailyTextAns);
+                console.log("Request successful", response.data.dailyTextAns);  // Log successful request data
             } catch (error) {
-                console.error("Failed to fetch user details:", error);
-                setUserDetails(null);
+                console.error("Failed to fetch daily text answers:", error);
+                setDailyTextAns(null);
             }
         };
+    
+        fetchDailyTextAns();
+    }, [userId, theDate]);  // Ensure these are the correct dependencies
 
-        if (userId) fetchUserData();
-    }, [userId]);
-
-    if (!isOpen || !userDetails) return null;
-
-    const dailyTextAns = userDetails.dailyTextAns || {};
-    console.log(dailyTextAns);
-    const dailyTextAnsEntries = Object.entries(dailyTextAns);
+    if (!isOpen) return null;
 
     return (
         <div className="modal-overlay">
@@ -32,23 +41,18 @@ function Modal({ isOpen, onClose, userId, theDate }) {
                     <button className="modal-close-button" onClick={onClose}>X</button>
                 </div>
                 <div className="modal-content">
-                    {dailyTextAnsEntries.length > 0 ? (
-                        dailyTextAnsEntries.map(([key, value], index) => (
-                            <div key={index}>
-                                <strong>{key}:</strong> 
-                                {typeof value === 'object' ? (
-                                    Object.entries(value).map(([subKey, subValue], subIndex) => (
-                                        <div key={subIndex}>
-                                            <strong>{subKey}:</strong> {Array.isArray(subValue) ? subValue.join(', ') : subValue}
-                                        </div>
-                                    ))
-                                ) : (
-                                    Array.isArray(value) ? value.join(', ') : value
-                                )}
-                            </div>
-                        ))
+                    {dailyTextAns ? (
+                        <div>
+                            <strong>Date:</strong> {theDate}<br />
+                            <strong>Details:</strong>
+                            {Object.entries(dailyTextAns).map(([key, value], index) => (
+                                <div key={index}>
+                                    <strong>{key}:</strong> {Array.isArray(value) ? value.join(', ') : value}
+                                </div>
+                            ))}
+                        </div>
                     ) : (
-                        <p>No daily text answers available.</p>
+                        <p>No daily text answers available for {theDate}.</p>
                     )}
                 </div>
             </div>
