@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Pie, Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import './Charts.css'; 
@@ -6,10 +6,30 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default styles first
 import { useNavigate } from 'react-router-dom';
 import Modal from './Modal';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function Charts() {
     const navigate = useNavigate();
+    const {userId} = useParams();
+    console.log("id is:" + userId);
+    const [user, setUser] = useState({ firstName: '', lastName: '' });
+    const [value, onChange] = useState(new Date());
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userResponse = await axios.get(`http://localhost:4000/api/users/${userId}`);
+                setUser(userResponse.data);
+                
+                // Assuming the API provides an endpoint to fetch user-specific chart data
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        };
+
+        fetchUserData();
+    }, [userId]);
     // Data for the pie chart
     const pieData = {
         labels: ['Red', 'Blue', 'Yellow'],
@@ -79,42 +99,31 @@ function Charts() {
         // Perform any logout operations here, like clearing session data
         navigate('/DocHome');
     };
-
-    const [value, onChange] = useState(new Date());
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDay, setSelectedDay] = useState(null);
 
     const handleDayClick = (value) => {
-        setSelectedDay(value);
-        setIsModalOpen(true);
+        onChange(value);  // Update the selected date state
+        const formattedDate = `${value.getMonth()+1}-${value.getDate()}`;  // Format date as "mm/dd"
+        console.log(formattedDate);
+        setSelectedDay(formattedDate);
+        setIsModalOpen(!isModalOpen);
     };
 
     return (
         <div>
             <button className="logout-button" onClick={handleLogout}>Back</button>
             <div className="card">
-                <h1 className="docHomeHeader">Client's Report</h1>
+                <h1 className="docHomeHeader">{user.firstName} {user.lastName}'s Report</h1>
                 <div className="chart-container">
-                    <div>
-                        <Pie data={pieData} />
-                    </div>
-                    <div>
-                        <Line data={lineData1} />
-                        <Line data={lineData2} />
-                    </div>
+                    <Pie data={pieData} />
+                    <Line data={lineData1} />
                 </div>
-                <h2>Client's Daily Logs</h2>
-                <div id="docCal" className="calendar-container">
-                    <Calendar
-                        onChange={handleDayClick}
-                        value={value}
-                        className="custom-calendar"
-                    />
-                </div>
+                <h2>{user.firstName} {user.lastName}'s Daily Logs</h2>
+                <Calendar onChange={handleDayClick} value={value} className="custom-calendar" />
             </div>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <h2>Details for {selectedDay?.toLocaleDateString()}</h2>
-                {/* You can add more content here, such as the details or logs of the selected day */}
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} userId={userId} date={selectedDay}>
+                <h2>Details for {selectedDay}</h2>
             </Modal>
         </div>
     );
