@@ -1,0 +1,53 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 50%; /* Adjust width as needed */
+}
+
+#modalHeader {
+    display: flex;
+    justify-content:flex-end; /* Aligns the close button to the right */
+    width: 190%; /* Ensures the header spans the full width of the modal */
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.modal-close-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px 10px; /* Adds some padding for better touch */
+    color: black;
+}
+
+.modal-content {
+    margin-top: -40px;
+    padding-top: 0px;
+}
+
+.modal-content .formatted-list {
+    list-style-type: decimal; /* Ensures it’s a numbered list */
+    padding: 0;
+    margin: 10px 20px;
+    font-size: 18px; /* Adjusts the font size */
+}
+
+.modal-content .formatted-list li {
+    margin-bottom: 10px; /* Adds space between list items */
+}
+

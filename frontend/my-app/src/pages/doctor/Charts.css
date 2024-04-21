@@ -3,6 +3,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: white;
+    overflow-y: auto;
 }
 
 .chart-container {
@@ -16,3 +17,28 @@
 .Pie, .Line {
     margin: 10px;
 }
+
+#docCal{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 0px;
+    margin-top: 0px;
+    min-height: 50vh;
+}
+
+/* Add to Charts.css */
+.tooltip {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 100;
+    width: 200px; /* Adjust size as needed */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none; /* Initially hidden */
+  }
+  
+  .tooltip.active {
+    display: block;
+  }
+  

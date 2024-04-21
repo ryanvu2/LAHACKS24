@@ -16,7 +16,8 @@ function App() {
         <Route path="/calendar" element={<MyCalendar />} />
         <Route path="/thought/:date" element={<ThoughtBubble />} />
         <Route path="/doctor" element={<DocHome />} />
-        <Route path="/" element={<SignInPage />} />
+        {/* <Route path="/" element={<SignInPage />} /> */}
+        <Route path = "/DocHome" element = {<DocHome/>}/>
         <Route path ="/signup" element = {<SignUp/>}/>
         <Route path="/charts" element={<Charts />} />
         <Route path="/questionnaire/:date" element={<Questionnaire />} />

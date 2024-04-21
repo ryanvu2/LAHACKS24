@@ -1,5 +1,6 @@
 import React from 'react';
 import './HomePage.css';
+import { useNavigate } from 'react-router-dom';
 
 function DocHome() {
     const clients = [
@@ -12,13 +13,15 @@ function DocHome() {
         { name: "Grace Lee", picUrl: "url_to_grace's_picture.jpg" },
         { name: "Henry Garcia", picUrl: "url_to_henry's_picture.jpg" },
         { name: "Isabel Martinez", picUrl: "url_to_isabel's_picture.jpg" },
-        { name: "John Doe", picUrl: "url_to_john's_picture.jpg" }
+        { name: "John Doe", picUrl: "url_to_john's_picture.jpg" },
+        { name: "Katherine Mills", picUrl: "url_to_john's_picture.jpg" },
+        { name: "Logan Turner", picUrl: "url_to_john's_picture.jpg" },
     ];
+    
+    const navigate = useNavigate();
 
-    // Placeholder for handling click, you'll need to implement actual navigation or logic
-    const handleProfileClick = (client) => {
-        console.log("Navigating to profile of:", client.name);
-        // Example: navigate(`/profile/${client.name}`); // If using React Router
+    const handleProfileClick = () => {
+        navigate('/charts'); // Navigate directly to the charts page
     };
 
     return (

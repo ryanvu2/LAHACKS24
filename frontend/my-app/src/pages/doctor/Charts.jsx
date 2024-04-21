@@ -4,7 +4,12 @@ import Chart from 'chart.js/auto';
 import './Charts.css'; 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default styles first
+import { useNavigate } from 'react-router-dom';
+import Modal from './Modal';
+
 function Charts() {
+    const navigate = useNavigate();
+
     // Data for the pie chart
     const pieData = {
         labels: ['Red', 'Blue', 'Yellow'],
@@ -70,34 +75,48 @@ function Charts() {
         ]
     };
 
+    const handleLogout = () => {
+        // Perform any logout operations here, like clearing session data
+        navigate('/DocHome');
+    };
+
     const [value, onChange] = useState(new Date());
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedDay, setSelectedDay] = useState(null);
+
+    const handleDayClick = (value) => {
+        setSelectedDay(value);
+        setIsModalOpen(true);
+    };
 
     return (
-        <div className="card">
-            <h1 className="docHomeHeader">Client's Report</h1>
-            <div className="chart-container">
-                <div>
-                    <Pie data={pieData} />
+        <div>
+            <button className="logout-button" onClick={handleLogout}>Back</button>
+            <div className="card">
+                <h1 className="docHomeHeader">Client's Report</h1>
+                <div className="chart-container">
+                    <div>
+                        <Pie data={pieData} />
+                    </div>
+                    <div>
+                        <Line data={lineData1} />
+                        <Line data={lineData2} />
+                    </div>
                 </div>
-                <div>
-                    <Line data={lineData1} />
-                    <Line data={lineData2} />
+                <h2>Client's Daily Logs</h2>
+                <div id="docCal" className="calendar-container">
+                    <Calendar
+                        onChange={handleDayClick}
+                        value={value}
+                        className="custom-calendar"
+                    />
                 </div>
             </div>
-            <h2>Client's Daily Logs</h2>
-            <div className="calendar-container">
-      <div className="custom-calendar-header">
-        {/* Other header components */}
-      </div>
-      <Calendar
-        onChange={onChange}
-        value={value}
-        className="custom-calendar"
-      />
-      {/* Other components such as the events list can be added here */}
-    </div>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <h2>Details for {selectedDay?.toLocaleDateString()}</h2>
+                {/* You can add more content here, such as the details or logs of the selected day */}
+            </Modal>
         </div>
-
     );
 }
 
