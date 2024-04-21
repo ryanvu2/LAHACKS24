@@ -8,9 +8,10 @@
 
 .chart-container {
     display:flex;
-    width: 80%;
+    width: 40%;
     justify-content: space-between;
     align-items: center;
+    /* width: 100px; */
 }
 
 /* Optional: Add some margins around the charts for better spacing */

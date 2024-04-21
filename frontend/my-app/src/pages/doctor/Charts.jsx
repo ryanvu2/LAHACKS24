@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pie, Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
-import './Charts.css'; 
+import './Charts.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from 'react-router-dom';
@@ -11,8 +11,8 @@ import axios from 'axios';
 
 function Charts() {
     const navigate = useNavigate();
-    const {userId} = useParams();
-    console.log("id is:" + userId);
+    const { userId } = useParams();
+    console.log("id is:", userId);
     const [user, setUser] = useState({ firstName: '', lastName: '' });
     const [value, onChange] = useState(new Date());
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,56 +68,19 @@ function Charts() {
         setIsPeriodicModalOpen(false);
     };
 
-const preprocessOutput = (text) => {
-    // const cleanedText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
-    // return cleanedText.replace(/`/g, ''); // Remove backticks or other non-JSON characters
-    let pattern = /```json\n{\n(.*?)\n}\n```/s;
+    const handleBoxClick = index => {
+        console.log("Box clicked:", index);
+        // Optionally handle click
+    };
 
-    // Use match() to find the first match of the pattern in the input text
-    let match = text.match(pattern);
-
-    // If a match is found, extract the content inside "```json```"
-    if (match) {
-        let jsonContent = match[1];
-        console.log(jsonContent);
-        return jsonContent;
-    } else {
-        console.log("No match found.");
-    }
-    
-};
-
-const renderPeriodicContent = () => {
-    if (!periodicData) {
-        return <p>No data available.</p>;
-    }
-
-    if (typeof periodicData === 'string') {
-        // Assume the string is JSON and parse it for better manipulation and display
-        try {
-            const dataObject = JSON.parse(periodicData);
-            return formatDataAsText(dataObject);
-        } catch (error) {
-            // If parsing fails, display the raw string
-            return <p>{preprocessOutput(periodicData)}</p>;
-        }
-    }
-
-    // If periodicData is already an object, format it directly
-    return formatDataAsText(preprocessOutput(periodicData));
-};
-
-const formatDataAsText = (dataObject) => {
-    // Map object entries to formatted string, skip outermost braces if they exist
-    let formattedContent = Object.entries(dataObject).map(([key, value]) => {
-        let formattedValue = typeof value === 'string' ? value.replace(/\n/g, '\n    ') : JSON.stringify(value, null, 4);
-        return `\n${key}:\n    ${formattedValue}`;
-    }).join('\n\n');
-
-    return <pre>{formattedContent}</pre>;
-};
-
-    
+    const boxHeaders = [
+        "Integrated Thematic Analysis: The overarching narrative revolves around the subject's journey towards improved mental well-being, with recurring themes of health, creativity, and achievement intertwined with challenges related to work and stress. The interplay between these themes highlights the subject's ongoing struggle to balance personal growth and external pressures, impacting their overall well-being.",
+        "Emotional and Thematic Interrelation: Themes of health and achievement are often associated with positive emotions and a sense of accomplishment, while work-related themes trigger negative emotions and stress. This suggests a potential causative relationship between work-related stress and fluctuations in mood and overall mental state.",
+        "Subtle Shifts in Mood and Tone: The journal entries demonstrate a shift from initial optimism and creative energy to feelings of overwhelm and negativity. This change coincides with the introduction of work-related stress as a prominent theme, indicating its significant impact on the subject's emotional state.",
+        "Evolution of Self-Perception: Initially, the subject demonstrates a growing sense of self-efficacy through journaling and engaging in creative activities. However, work-related stress challenges this self-perception, leading to moments of doubt and self-criticism. This highlights the vulnerability of self-perception to external stressors.",
+        "Predictive Insights on Mental Health: The observed patterns suggest a potential risk of developing chronic stress or anxiety if work-related stressors remain unaddressed. The subject's mood instability and vulnerability to negative thought patterns further emphasize the need for proactive intervention.",
+        "Coping Strategy Effectiveness: Journaling and exercise appear to be somewhat effective in managing stress and promoting emotional well-being. However, the subject struggles to implement these strategies during periods of high stress. This suggests a need for exploring additional coping mechanisms, such as relaxation techniques or mindfulness exercises, to build resilience and better manage challenging situations."
+    ];
 
     return (
         <div>
@@ -129,9 +92,14 @@ const formatDataAsText = (dataObject) => {
                     <Line data={lineData} />
                 </div>
                 <h2>Periodic Trends</h2>
-                    <div className="periodic-content">
-                        {renderPeriodicContent()}
-                    </div>
+                <div>
+                    {boxHeaders.map((header, index) => (
+                        <div key={index} onClick={() => handleBoxClick(index)}>
+                            <h3 className="scrolling-box-header">{header.split(":")[0]}</h3>
+                            <p>{header.split(":")[1]}</p>
+                        </div>
+                    ))}
+                </div>
                 <h2>{user.firstName} {user.lastName}'s Daily Logs</h2>
                 <Calendar onChange={handleDayClick} value={value} />
             </div>
