@@ -18,6 +18,20 @@ const userSchema = new Schema({
     textAns: {
         type: Map,
         of: String
+    },
+    isDoctor: {
+        type: Boolean,
+        required: true
+    },
+    doctorsPatients: {
+        type: Array
+    },
+    dailyTextAns: {
+        type: Map,
+        of: Object
+    },
+    profilePic: {
+        type: String
     }
 }, {timestamps: true}) //tracks when it was made and edited
 

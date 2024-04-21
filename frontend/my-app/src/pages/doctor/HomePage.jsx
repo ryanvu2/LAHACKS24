@@ -1,40 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function DocHome() {
-    const clients = [
-        { name: "Alice Johnson", picUrl: "https://media.istockphoto.com/id/1386479313/photo/happy-millennial-afro-american-business-woman-posing-isolated-on-white.jpg?s=612x612&w=0&k=20&c=8ssXDNTp1XAPan8Bg6mJRwG7EXHshFO5o0v9SIj96nY=" },
-        { name: "Bob Smith", picUrl: "url_to_bob's_picture.jpg" },
-        { name: "Carol Taylor", picUrl: "url_to_carol's_picture.jpg" },
-        { name: "David Brown", picUrl: "url_to_david's_picture.jpg" },
-        { name: "Eve White", picUrl: "url_to_eve's_picture.jpg" },
-        { name: "Frank Jones", picUrl: "url_to_frank's_picture.jpg" },
-        { name: "Grace Lee", picUrl: "url_to_grace's_picture.jpg" },
-        { name: "Henry Garcia", picUrl: "url_to_henry's_picture.jpg" },
-        { name: "Isabel Martinez", picUrl: "url_to_isabel's_picture.jpg" },
-        { name: "John Doe", picUrl: "url_to_john's_picture.jpg" },
-        { name: "Katherine Mills", picUrl: "url_to_john's_picture.jpg" },
-        { name: "Logan Turner", picUrl: "url_to_john's_picture.jpg" },
-    ];
-    
+    const [clients, setClients] = useState([]);
     const navigate = useNavigate();
+    const currentUserId = "6624c9fc1f8db651f009463d";  // Use dynamic ID for authenticated user
 
-    const handleProfileClick = () => {
-        navigate('/charts'); // Navigate directly to the charts page
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/api/users/${currentUserId}`);
+                const patientIds = response.data.doctorsPatients;
+                fetchPatientDetails(patientIds);
+            } catch (error) {
+                console.error('Failed to fetch clients:', error);
+            }
+        };
+
+        const fetchPatientDetails = async (patientIds) => {
+            try {
+                const requests = patientIds.map(id =>
+                    axios.get(`http://localhost:4000/api/users/${id}`)
+                );
+                const responses = await Promise.all(requests);
+                const patientData = responses.map(res => ({
+                    name: `${res.data.firstName} ${res.data.lastName}`,
+                    picUrl: res.data.profilePic,
+                    id: res.data._id
+                }));
+                setClients(patientData);
+            } catch (error) {
+                console.error('Failed to fetch patient details:', error);
+            }
+        };
+
+        fetchClients();
+    }, []);
+
+    const handleProfileClick = (clientId) => {
+        console.log(clientId);
+        navigate(`/charts/${clientId}`); // Navigate with clientId
     };
 
     return (
         <div className="card">
-            <h1 class = "docHomeHeader">Client List</h1>
+            <h1 className="docHomeHeader">Client List</h1>
             <ul className="client-list">
                 {clients.map((client, index) => (
                     <li key={index} className="client-item">
-                        <button onClick={() => handleProfileClick(client)} className="profile-button">
+                        <button onClick={() => handleProfileClick(client.id)} className="profile-button">
                             <div className="profile-pic" style={{ backgroundImage: `url(${client.picUrl})` }}></div>
+                            <p className="client-name">{client.name}</p>  {/* Name now appears under the image */}
                         </button>
-                        {/* <div className="profile-pic" style={{ backgroundImage: `url(${client.picUrl})` }}></div> */}
-                        <p className="client-name">{client.name}</p>
                     </li>
                 ))}
             </ul>
