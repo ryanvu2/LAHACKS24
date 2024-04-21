@@ -60,7 +60,7 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #007bff;
+    background: #d8b9ff;
     cursor: pointer;
 }
 
@@ -76,7 +76,7 @@ body {
 }
 
 .question-container input[type="range"]:focus::-webkit-slider-runnable-track {
-    background: #007bff;
+    background: #d8b9ff;
 }
 
 /* Styling for radio buttons - hidden actual inputs, custom styling for labels */
@@ -93,15 +93,15 @@ body {
 }
 
 .question-container input[type="radio"]:checked+label {
-    border-color: #007bff;
-    background-color: #007bff;
+    border-color: #d8b9ff;
+    background-color: #d8b9ff;
     color: white;
 }
 
 /* Button styling */
 .question-container button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #d8b9ff;
     color: white;
     border: none;
     border-radius: 20px;
@@ -139,8 +139,13 @@ body {
 }
 
 .question-container input[type="radio"]:checked+label {
-    border-color: #007bff;
-    background-color: #007bff;
+    border-color: #d8b9ff;
+    background-color: #d8b9ff;
     color: white;
     box-shadow: 0 2px 5px rgba(0, 123, 255, 0.5);
+}
+
+.completion-button {
+    background-color: #d8b9ff;
+    color: white;
 }

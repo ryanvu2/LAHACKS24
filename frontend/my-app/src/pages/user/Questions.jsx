@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Questions.css'; // Make sure to import the CSS file
+import './Questions.css';
+import { useNavigate } from 'react-router-dom';
 
 const questions = [
     { id: 1, text: "How many hours of sleep did you get in the past 24 hours?", inputType: "number" },
@@ -13,16 +14,30 @@ const questions = [
 ];
 
 function Questionnaire() {
+    const navigate = useNavigate();
+    const initialAnswers = questions.reduce((acc, question) => ({
+        ...acc,
+        [question.id]: question.inputType === 'binary' ? '' : (question.inputType === 'slider' ? 5 : 0)
+    }), {});
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState({});
+    const [answers, setAnswers] = useState(initialAnswers);
 
     const handleInput = (key, value) => {
-        setAnswers({ ...answers, [key]: value });
+        setAnswers(prev => ({ ...prev, [key]: value }));
     };
 
     const handleNextQuestion = () => {
-        const currentQuestion = questions[currentQuestionIndex];
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setCurrentQuestionIndex(current => current + 1);
+    };
+
+    const handleSubmit = async () => {
+        console.log('Submitting Answers:', answers);
+        navigate('/');
+        // Here you'd make an Axios POST request
+        // axios.post('http://localhost:4000/api/submit', answers)
+        //     .then(response => console.log('Success:', response))
+        //     .catch(error => console.error('Error submitting:', error));
     };
 
     const renderInputField = () => {
@@ -33,16 +48,16 @@ function Questionnaire() {
             case 'slider':
                 return (
                     <>
-                        <input type="range" min="1" max="10" value={answers[currentQuestion.id] || 5} onChange={(e) => handleInput(currentQuestion.id, e.target.value)} />
-                        <div>Rating: {answers[currentQuestion.id] || 5}</div>
+                        <input type="range" min="1" max="10" value={answers[currentQuestion.id]} onChange={(e) => handleInput(currentQuestion.id, e.target.value)} />
+                        <div>Rating: {answers[currentQuestion.id]}</div>
                     </>
                 );
             case 'binary':
                 return (
                     <div>
-                        <input type="radio" id={`${currentQuestion.id}-yes`} name={currentQuestion.id} value="Yes" checked={answers[currentQuestion.id] === 'Yes'} onChange={(e) => handleInput(currentQuestion.id, e.target.value)} />
+                        <input type="radio" id={`${currentQuestion.id}-yes`} name={`question-${currentQuestion.id}`} value="Yes" checked={answers[currentQuestion.id] === 'Yes'} onChange={(e) => handleInput(currentQuestion.id, 'Yes')} />
                         <label htmlFor={`${currentQuestion.id}-yes`}>Yes</label>
-                        <input type="radio" id={`${currentQuestion.id}-no`} name={currentQuestion.id} value="No" checked={answers[currentQuestion.id] === 'No'} onChange={(e) => handleInput(currentQuestion.id, e.target.value)} />
+                        <input type="radio" id={`${currentQuestion.id}-no`} name={`question-${currentQuestion.id}`} value="No" checked={answers[currentQuestion.id] === 'No'} onChange={(e) => handleInput(currentQuestion.id, 'No')} />
                         <label htmlFor={`${currentQuestion.id}-no`}>No</label>
                         {currentQuestion.specify && answers[currentQuestion.id] === 'Yes' && (
                             <input
@@ -70,6 +85,7 @@ function Questionnaire() {
             ) : (
                 <div className="completion-message">
                     Thank you for completing the questionnaire!
+                    <button className="completion-button" onClick={handleSubmit}>Go Back</button>
                 </div>
             )}
         </div>

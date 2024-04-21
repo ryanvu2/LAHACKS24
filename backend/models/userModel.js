@@ -13,7 +13,7 @@ const userSchema = new Schema({
     },
     questAns: {
         type: Map,
-        of: String
+        of: Object
     },
     textAns: {
         type: Map,
