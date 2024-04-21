@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import './SignUp.css';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const [selectedPic, setSelectedPic] = useState(null);
@@ -12,7 +13,8 @@ function SignUp() {
         lastName: ''
     });
     const [errors, setErrors] = useState({});
-
+    const navigate = useNavigate();
+    
     // Options for react-select
     const profilePics = [
         { value: 'url_to_image_1.jpg', label: 'Player', image: 'https://i5.walmartimages.com/seo/Funko-POP-Basketball-Team-USA-Karl-Malone-113-Exclusive_9e11c344-24b1-4e91-8b8f-43e210792a16.78e897552252442104d4477de4d2c848.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF' },
@@ -61,7 +63,7 @@ function SignUp() {
     return (
         <div className="form-container">
             <form className="signup-form" onSubmit={handleSubmit}>
-                <h1>Sign Up</h1>
+                <h1 class = "darkHeader">Sign Up</h1>
                 <input type="text" name="username" placeholder="Username" required
                        value={formData.username} onChange={handleInputChange} />
                 {errors.username && <p>{errors.username}</p>}
@@ -96,7 +98,7 @@ function SignUp() {
                     </div>
                     {errors.role && <p className="error-message">{errors.role}</p>}
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit" onClick={() => navigate('/calendar')}>Sign Up</button>
             </form>
         </div>
     );

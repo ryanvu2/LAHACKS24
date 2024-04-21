@@ -46,7 +46,7 @@ const ThoughtBubble = () => {
         } catch (error) {
             console.error('Failed to update text:', error);
         }
-        navigate('/');
+        navigate('/calendar')
     };
 
     const handleSubmit = () => {

@@ -42,7 +42,6 @@ function Questionnaire() {
 
     const handleSubmit = async () => {
         console.log(`Submitting to: http://localhost:4000/api/users/${userID}/questAns/${date}`);
-        console.log('Answers:', answers);
         try {
             const response = await axios.patch(`http://localhost:4000/api/users/${userID}/questAns/${date}`, { answers });
             console.log('Success:', response.data);
@@ -50,6 +49,8 @@ function Questionnaire() {
         } catch (error) {
             console.error('Error submitting:', error.response ? error.response.data : error.message);
         }
+        console.log('Submitting Answers:', answers);
+        navigate('/calendar');
     };
 
     const renderInputField = () => {

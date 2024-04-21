@@ -16,6 +16,7 @@ function MyCalendar() {
 
   return (
     <div className="calendar-container">
+      <h1 class = "homeName">blear.ai</h1>
       <Calendar
         onChange={handleDateClick}
         value={value}

@@ -1,5 +1,6 @@
 import React from 'react';
 import "./SignIn.css"
+import { useNavigate } from 'react-router-dom';
 
 function SignInPage() {
   // Handle the form submission
@@ -8,10 +9,12 @@ function SignInPage() {
     // Handle sign in
   }
 
+  const navigate = useNavigate();
+
   return (
     <div style={{ margin: 'auto' }}>
       <form onSubmit={handleSubmit}>
-        <h1>MindScope</h1>
+        <h1>blear.ai</h1>
 
         {/* <button type="button">CONTINUE WITH FACEBOOK</button>
         <button type="button">CONTINUE WITH APPLE</button>
@@ -20,7 +23,7 @@ function SignInPage() {
         <hr />
 
         <div>
-          <label htmlFor="username">Email Address or Username</label>
+          <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" required />
         </div>
 
@@ -35,7 +38,7 @@ function SignInPage() {
           </label>
         </div>
 
-        <button type="submit">LOG IN</button>
+        <button type="submit" onClick={() => navigate('/calendar')}>LOG IN</button>
 
         {/* <div>
           <a href="/reset-password">Forgot your password?</a>
@@ -45,7 +48,7 @@ function SignInPage() {
 
         <div>
           <p>Don't have an account?</p>
-          <button type="button">SIGN UP FOR MINDSCOPE</button>
+          <button class = "signButton" onClick={() => navigate('/signup')}>SIGN UP FOR BLEAR.AI</button>
         </div>
       </form>
     </div>
