@@ -21,6 +21,7 @@ const ThoughtBubble = () => {
         const dateObj = formatDate(dateStr);
         return dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
     };
+    
 
     useEffect(() => {
         const fetchText = async () => {

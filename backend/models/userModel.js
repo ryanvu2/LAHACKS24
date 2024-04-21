@@ -21,7 +21,6 @@ const userSchema = new Schema({
     },
     isDoctor: {
         type: Boolean,
-        required: true
     },
     doctorsPatients: {
         type: Array

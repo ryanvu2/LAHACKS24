@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
 const {run} = require('./daily')
+const {wholeRun} = require('./periodic')
 
 //get all users
 const getUsers = async(req,res) => {
@@ -185,6 +186,48 @@ const getDailyTextAns = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+async function processUserTexts(userId) {
+    try {
+        // Step 1: Fetch the user and their text answers
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const textAns = user.textAns;
+        const dailyAns = user.dailyTextAns;
+        if (!textAns || textAns.size === 0) {
+            throw new Error("No text answers found for this user");
+        }
+        if (!dailyAns || dailyAns.size === 0) {
+            throw new Error("No daily anlyses found for this user");
+        }
+
+        // Step 2: Sort the entries by date keys (mm-dd format)
+        const sortedTexts = Array.from(textAns.entries()).sort((a, b) => {
+            // Assuming keys are in the format "mm-dd"
+            const dateA = a[0].split('-');
+            const dateB = b[0].split('-');
+            return (dateB[0] - dateA[0]) || (dateB[1] - dateA[1]);  // Sort by month and day
+        }).map(entry => entry[1]);  // Extract just the text answers in sorted order
+        const sortedDaily = Array.from(dailyAns.entries()).sort((a, b) => {
+            // Assuming keys are in the format "mm-dd"
+            const dateA = a[0].split('-');
+            const dateB = b[0].split('-');
+            return (dateB[0] - dateA[0]) || (dateB[1] - dateA[1]);  // Sort by month and day
+        }).map(entry => entry[1]);  // Extract just the text answers in sorted order
+
+        // Step 3: Execute the wholeRun analysis function
+        const analysisResult = await wholeRun(sortedTexts, sortedDaily);
+        // console.log(analysisResult);
+        return analysisResult;
+    } catch (error) {
+        console.error("Error processing user texts:", error.message);
+        throw error;
+    }
+}
+
 module.exports = {
     createUser,
     getUsers,
@@ -194,5 +237,6 @@ module.exports = {
     getSingleTextAns,
     updateTextAns,
     updateQuestAns,
-    getDailyTextAns
+    getDailyTextAns,
+    processUserTexts
 }
