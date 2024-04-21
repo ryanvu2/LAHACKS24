@@ -36,7 +36,7 @@ function Charts() {
     }, [userId]);
 
     const pieData = {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: ['family', 'love', 'work'],
         datasets: [{
             data: [300, 50, 100],
             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],

@@ -8,7 +8,7 @@
 
 .chart-container {
     display:flex;
-    width: 40%;
+    width: 30%;
     justify-content: space-between;
     align-items: center;
     /* width: 100px; */
