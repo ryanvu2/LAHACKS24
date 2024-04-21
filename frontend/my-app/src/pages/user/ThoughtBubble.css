@@ -20,6 +20,7 @@ body {
   padding: 10px 0;  /* Add some vertical padding */
   z-index: 1000;    /* Ensure it's above other content */
   color: white;
+  font-size: 50px;
 }
 
 .thought-bubble-container {
