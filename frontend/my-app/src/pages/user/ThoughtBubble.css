@@ -1,0 +1,124 @@
+/* ThoughtBubble.css */
+
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-image: url('THOUGHTBACK.jpeg'); /* Path to your background image */
+  background-size: cover; /* Cover the entire viewport without stretching */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.bubbleHeader {
+  position: fixed;  /* Fixed positioning relative to the viewport */
+  top: 0;           /* Align to the top of the viewport */
+  left: 50%;        /* Center horizontally relative to the viewport */
+  transform: translateX(-50%); /* Offset by 50% of its own width to center perfectly */
+  text-align: center; /* Ensure text is centered */
+  padding: 10px 0;  /* Add some vertical padding */
+  z-index: 1000;    /* Ensure it's above other content */
+  color: white;
+}
+
+.thought-bubble-container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw; /* Use the full viewport width */
+  height: 100vh; /* Use the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bubble {
+  background-color: #fff;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: absolute;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.small-bubble1 {
+  width: 50px;
+  height: 50px;
+  left: 25%;
+  bottom: 10%;
+  animation-name: oscillate;
+}
+
+.small-bubble2 {
+  width: 100px;
+  height: 100px;
+  left: 30%;
+  bottom: 15%;
+  animation-name: oscillate;
+  animation-delay: 1s; /* Delay to desynchronize the animations */
+}
+
+.big-bubble {
+  width: 500px;  /* Large size to make it prominent */
+  height: 500px; /* Aspect ratio maintained for aesthetic */
+  animation-name: oscillate;
+  animation-delay: 2s;
+}
+
+.thought-textarea {
+  width: 350px; /* Relative to parent (big-bubble) */
+  height: 350px; /* Making the text area large enough for entries */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  resize: none; /* Disable resizing of the textarea */
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow for depth */
+}
+
+.thought-bubble-container .big-bubble {
+  position: relative; /* Ensures child elements can be positioned absolutely within */
+}
+
+.thought-bubble-container .button-container {
+  position: fixed;  /* Fixed positioning relative to the viewport */
+  bottom: 30px;     /* 10px from the bottom */
+  display: flex;
+  gap: 10px;        /* Space between buttons */
+}
+
+.thought-bubble-container button {
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.thought-bubble-container .save-button {
+  background-color: #d8b9ff; /* Green background */
+  color: white;              /* White text */
+}
+
+.thought-bubble-container .submit-button {
+  background-color: #d8b9ff; /* Blue background */
+  color: white;              /* White text */
+}
+
+
+@keyframes oscillate {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

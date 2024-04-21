@@ -1,28 +1,34 @@
 const express = require('express')
 const router = express.Router()
+const {
+    createUser,
+    getUsers,
+    getUser,
+    deleteUser,
+    updateUser,
+    getSingleTextAns,
+    updateTextAns
+} = require('../controllers/userController')
 
-//get user
-router.get('/', (req,res)=>{
-    res.json({mssg: "GET ALL THE USERS"})
-})
-// get single user
-router.get('/:id', (req,res)=>{
-    res.json({mssg: "GET SINGLE USER"})
-})
-// get single user
-router.post('/', (req,res)=>{
-    res.json({mssg: "POST NEW USER"})
-})
-// DELETE A USER
-router.delete('/:id', (req,res)=>{
-    res.json({mssg: "DELETE SINGLE USER"})
-})
-// update single user
-router.patch('/:id', (req,res)=>{
-    res.json({mssg: "UPDATE SINGLE USER"})
-})
+// Specific routes for text answers should come before general user routes
+// Get or create text answer by date for a specific user
+router.post('/:id/textAns/:date', updateTextAns);  // POST handler for updating text answers
+router.get('/:id/textAns/:date', getSingleTextAns);  // GET handler for retrieving text answers
 
+// General user routes
+// Get all users
+router.get('/', getUsers);
 
+// Get single user
+router.get('/:id', getUser);
 
+// Create a user
+router.post('/', createUser);
 
-module.exports = router
+// Delete a user
+router.delete('/:id', deleteUser);
+
+// Update a user
+router.patch('/:id', updateUser);
+
+module.exports = router;
