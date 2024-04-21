@@ -4,7 +4,11 @@ import Chart from 'chart.js/auto';
 import './Charts.css'; 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default styles first
+import { useNavigate } from 'react-router-dom';
+
 function Charts() {
+    const navigate = useNavigate();
+
     // Data for the pie chart
     const pieData = {
         labels: ['Red', 'Blue', 'Yellow'],
@@ -70,9 +74,16 @@ function Charts() {
         ]
     };
 
+    const handleLogout = () => {
+        // Perform any logout operations here, like clearing session data
+        navigate('/DocHome');
+    };
+
     const [value, onChange] = useState(new Date());
 
     return (
+        <div>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
         <div className="card">
             <h1 className="docHomeHeader">Client's Report</h1>
             <div className="chart-container">
@@ -85,7 +96,7 @@ function Charts() {
                 </div>
             </div>
             <h2>Client's Daily Logs</h2>
-            <div className="calendar-container">
+    <div id = "docCal" className="calendar-container">
       <div className="custom-calendar-header">
         {/* Other header components */}
       </div>
@@ -97,7 +108,7 @@ function Charts() {
       {/* Other components such as the events list can be added here */}
     </div>
         </div>
-
+        </div>
     );
 }
 
