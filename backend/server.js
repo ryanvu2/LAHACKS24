@@ -1,31 +1,36 @@
-//entry file for the backend app
-//where we register the express app
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
-const userRoutes = require('./routes/users')
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/users');
+const cors = require('cors');
 
-//express app
-const app = express()
+// Express app
+const app = express();
 
-//middleware
-app.use(express.json()) //any request that comes it looks and checks if it has some body to the request or data that it sends to the server and if it does it parses and attaches to the request object so i can access it in request handler
-app.use((req,res,next)=>{
-    console.log(req.path, req.method)
-    next()
-})
-//route handeler to react to requests
-//routes
-app.use('/api/users',userRoutes)
+// Middleware
+app.use(express.json()); // Parses JSON bodies
 
-//connect to db
+// CORS Configuration: Allow only the frontend origin for security
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
+
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+});
+
+// Routes
+app.use('/api/users', userRoutes);
+
+// Connect to database
 mongoose.connect(process.env.MONGO_URI)
-    .then(()=>{
-        //listen for requests
-        app.listen(process.env.PORT, ()=>{
-            console.log("listening on port " + process.env.PORT)
-        })
+    .then(() => {
+        // Listen for requests
+        app.listen(4000, () => {
+            console.log("listening on port 4000");
+        });
     })
     .catch((error) => {
-        console.log(error)
-    })
+        console.log(error);
+    });

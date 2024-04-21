@@ -5,7 +5,7 @@ body {
   padding: 0; /* Remove default padding */
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
-  background-image: src = ('.../public/THOUGHTBACK.jpeg'); /* Path to your background image */
+  background-image: url('THOUGHTBACK.jpeg'); /* Path to your background image */
   background-size: cover; /* Cover the entire viewport without stretching */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the image from repeating */
@@ -85,6 +85,34 @@ body {
   outline: none;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow for depth */
 }
+
+.thought-bubble-container .big-bubble {
+  position: relative; /* Ensures child elements can be positioned absolutely within */
+}
+
+.thought-bubble-container .button-container {
+  position: fixed;  /* Fixed positioning relative to the viewport */
+  bottom: 30px;     /* 10px from the bottom */
+  display: flex;
+  gap: 10px;        /* Space between buttons */
+}
+
+.thought-bubble-container button {
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.thought-bubble-container .save-button {
+  background-color: #d8b9ff; /* Green background */
+  color: white;              /* White text */
+}
+
+.thought-bubble-container .submit-button {
+  background-color: #d8b9ff; /* Blue background */
+  color: white;              /* White text */
+}
+
 
 @keyframes oscillate {
   0%, 100% {
