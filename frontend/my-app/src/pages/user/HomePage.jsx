@@ -14,9 +14,18 @@ function MyCalendar() {
     navigate(`/thought/${formattedDate}`);  // Navigate to ThoughtBubble page
   };
 
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log("Logging out...");
+    navigate('/'); // Navigate to login page or handle logout
+  };
+
   return (
     <div className="calendar-container">
-      <h1 class = "homeName">blear.ai</h1>
+      <div className="header">
+        <h1 className="homeName">blear.ai</h1>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
+      </div>
       <Calendar
         onChange={handleDateClick}
         value={value}

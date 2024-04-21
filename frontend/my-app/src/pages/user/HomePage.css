@@ -72,7 +72,8 @@ html, body {
   min-height: 100vh; /* Container takes at least the full height of the viewport */
   width: 80%; /* Container takes full width */
   margin: 0 auto; /* Center the container */
-  padding: 0;
+  position: relative;
+  padding: 20px;
   border-radius: 10px;
    /* Remove box shadow or adjust as needed */
 }
@@ -119,3 +120,30 @@ html, body {
   font-weight: 200;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background-color: #f44336; /* Red color, change as needed */
+  color: white;
+  border: none;
+  border-radius: 30px; /* Makes the button ovular */
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+  width: 10%;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f; /* Darker shade of red for hover effect */
+}
+
+.homeName{
+  flex: 1; /* Allows the title to take the remaining space to stay centered */
+  text-align: center;
+}
