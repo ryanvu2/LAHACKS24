@@ -83,7 +83,7 @@ function Charts() {
 
     return (
         <div>
-            <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <button className="logout-button" onClick={handleLogout}>Back</button>
         <div className="card">
             <h1 className="docHomeHeader">Client's Report</h1>
             <div className="chart-container">
