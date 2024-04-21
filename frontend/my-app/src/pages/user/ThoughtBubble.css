@@ -48,26 +48,44 @@ body {
 .small-bubble1 {
   width: 50px;
   height: 50px;
-  left: 25%;
-  bottom: 10%;
+  left: 20%;
+  bottom: 7%;
   animation-name: oscillate;
 }
 
 .small-bubble2 {
-  width: 100px;
-  height: 100px;
-  left: 30%;
+  width: 75px;
+  height: 75px;
+  left: 25%;
   bottom: 15%;
-  animation-name: oscillate;
+  animation-name: oscillate-subtle; /* Using the new subtler animation */
   animation-delay: 1s; /* Delay to desynchronize the animations */
+  animation-duration: 2s; /* Duration of the animation */
+  animation-timing-function: ease-in-out; /* Smooth animation timing */
+  animation-iteration-count: infinite; /* Repeat the animation indefinitely */
+  background-color: #fff; /* Background color of the bubble */
+  border: 2px solid white; /* Border to make the bubble more defined */
+  border-radius: 50%; /* Fully rounded edges for a circular shape */
 }
 
 .big-bubble {
-  width: 500px;  /* Large size to make it prominent */
-  height: 500px; /* Aspect ratio maintained for aesthetic */
+  width: 700px;
+  height: 400px;
+  background-color: #fff;
+  border: 2px solid white;
+  border-radius: 150px;
+  position: absolute;
+  transform: translate(-50%, -50%);
   animation-name: oscillate;
-  animation-delay: 2s;
+  animation-delay: 0s;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both; /* This ensures that the keyframe transformation applies throughout */
 }
+
+
+
 
 .thought-textarea {
   width: 350px; /* Relative to parent (big-bubble) */
@@ -120,6 +138,16 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-18px);
   }
 }
+
+@keyframes oscillate-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); /* Reduced movement by half */
+  }
+}
+
