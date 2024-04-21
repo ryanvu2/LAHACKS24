@@ -38,15 +38,17 @@ const ThoughtBubble = () => {
         navigate('/')
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         console.log('Submit button clicked');
         try {
-            await axios.post(`/api/users/${userId}/textAns/${date}`, { text });
-            console.log('Text updated successfully!');
+            axios.post(`/api/users/${userId}/textAns/${date}`, { text })
+                 .then(response => {
+                     console.log('Text updated successfully!');
+                     navigate(`/questionnaire/${date}`); // Pass date to Questionnaire
+                 });
         } catch (error) {
             console.error('Failed to update text:', error);
         }
-        navigate(`/questionnaire`);  // Navigate to ThoughtBubble page
     };
 
     return (

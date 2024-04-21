@@ -17,7 +17,8 @@ function App() {
         <Route path="/doctor" element={<DocHome />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/charts" element={<Charts />} />
-        <Route path="/questionnaire" element={<Questionnaire />} />
+        <Route path="/questionnaire/:date" element={<Questionnaire />} />
+
       </Routes>
     </Router>
   );
