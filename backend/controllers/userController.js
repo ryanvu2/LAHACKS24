@@ -101,28 +101,31 @@ const updateTextAns = async (req, res) => {
             return res.status(404).json({ error: "No such user" });
         }
 
-        // Updating text
         user.textAns.set(date, text);
         await user.save();
         console.log("Updated Text for Date:", user.textAns.get(date));
 
-        // Running daily analysis
-        try {
-            const dailyResult = await run(text);  // Assuming runDaily returns a string or object
-            console.log("Daily analysis result:", dailyResult);
-            res.json({ date: date, text: user.textAns.get(date), dailyResult: dailyResult });
-        } catch (error) {
-            console.error("Error in runDaily function:", error);
-            res.status(500).json({ error: "Error processing daily analysis" });
+        const dailyResult = await run(text);
+        console.log("Daily analysis result:", dailyResult);
+
+        // Initialize dailyTextAns if it doesn't exist
+        if (!user.dailyTextAns) {
+            user.dailyTextAns = new Map();
         }
-        
+        user.dailyTextAns.set(date, dailyResult);
+        await user.save();  // Save again with the new daily analysis
+
+        res.json({
+            date: date,
+            text: user.textAns.get(date),
+            dailyResult: user.dailyTextAns.get(date)
+        });
     } catch (error) {
         console.error("Error in updateTextAns:", error);
-        if (!res.headersSent) {
-            res.status(500).json({ error: error.message });
-        }
+        res.status(500).json({ error: error.message });
     }
 };
+
 
 
 const updateQuestAns = async (req, res) => {

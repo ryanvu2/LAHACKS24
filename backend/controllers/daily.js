@@ -33,61 +33,45 @@ async function run(journal) {
     },
   ];
 
-  //const journal = `I'm beginning to feel like I can manage my stress better. The coping techniques my therapist recommended, especially mindfulness meditation, are becoming a vital part of my daily life. I find myself looking forward to these moments of peace. It’s not that the problems have disappeared, but I feel more equipped to handle them. My self-talk has become more positive and forgiving.`
+  const prompt = `Let's analyze the journal entry for a summary on mental health, avoiding direct quotes and ensuring confidentiality. Follow the definition of each point and select the most likely choice based on the given categories.
 
-  const prompt = `Let's analyze the journal entry for a summary on mental health, avoiding direct quotes and ensuring confidentiality. Follow the defition of each point and select the most likely choice based on the given categories.
-
-1. Themes Detected:
+  Themes Detected:
   Definition: Identify main topics discussed in the entry.
   Categories: [family, friends, money, work, health, loss, change, achievement, nature, creativity, others, none]
 
-2. Emotional Intensity:
+  Emotional Intensity:
   Definition: Assess the strength of emotions expressed.
-    Categories: [high, low, others, none]
+  Categories: [high, low, others, none]
 
-3. Mentions of Social Interaction:
+  Mentions of Social Interaction:
   Definition: Note any social interactions mentioned.
   Categories: [yes, no, others, none]
 
-4. Cognitive Patterns:
+  Cognitive Patterns:
   Definition: Identify recurring thought patterns.
   Categories: [positive self-talk, negative self-talk, rumination, doubt, self-blame, optimism, pessimism, catastrophizing, others, none]
 
-5. Coping Strategies:
+  Coping Strategies:
   Definition: Describe methods mentioned for managing stress or challenges.
   Categories: [exercise, meditation, substance use, avoidance, social support, hobbies, others, none]
 
-6. Emotional Triggers:
+  Emotional Triggers:
   Definition: Identify events that provoke strong emotions.
   Categories: [conflicts, past events, stressful situations, financial issues, health concerns, others, none]
 
-7. Mood Stability:
+  Mood Stability:
   Definition: Assess the stability of the writer's emotional state.
   Categories: [consistent mood, fluctuating moods, stable with minor fluctuations, others, none]
 
-8. Risk Factors:
+  Risk Factors:
   Definition: Identify factors that may increase mental health risks.
   Categories: [trauma, substance use, mental health history, chronic stress, poor social support, others, none]
 
 Complete the analysis in the JSON dictionary format.
-Format for each journal:
-{
-  Themes Detected: [Themes Detected Category],
-  Emotional Intensity: [Emotional Intensity Category],
-  Mentions of Social Interaction: [Mentions of Social Interaction Category],
-  Cognitive Patterns: [Cognitive Patterns Category],
-  Coping Strategies: [Coping Strategies],
-  Emotional Triggers: [Emotional Triggers Category],
-  Mood Stability: [Mood Stability Category],
-  Risk Factors: [Risk Factors Category]
-}
-
 Journal Entry: ${journal}
-`
-  // console.log(prompt)
-  const parts = [
-    { text: prompt },
-  ];
+`;
+
+  const parts = [{ text: prompt }];
 
   const result = await model.generateContent({
     contents: [{ role: "user", parts }],
@@ -95,8 +79,27 @@ Journal Entry: ${journal}
     safetySettings,
   });
 
-  const response = result.response;
-  return(response.text());
+  const rawOutput = result.response.text();
+  console.log("Raw output:", rawOutput);  // Log the raw output to check its format
+
+  const preprocessOutput = (text) => {
+    // Remove leading non-JSON characters and text, specifically targeting unwanted markdown or preliminary labels like "json"
+    const cleanedText = text.substring(text.indexOf('{'));  // This finds the first occurrence of '{' and cuts everything before it
+    return cleanedText.replace(/`/g, '');  // Remove backticks or other non-JSON characters
+  };
+  
+
+  const cleanedOutput = preprocessOutput(rawOutput);
+  console.log("Cleaned output:", cleanedOutput);
+
+  try {
+    const responseJson = JSON.parse(cleanedOutput);  // Parse the cleaned output to JSON
+    return responseJson;
+  } catch (error) {
+    console.error("Failed to parse response into JSON:", error);
+    console.error("Cleaned output for review:", cleanedOutput);
+    throw new Error("Failed to parse response into JSON");
+  }
 }
 
-module.exports = {run};
+module.exports = { run };

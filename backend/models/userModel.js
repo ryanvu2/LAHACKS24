@@ -18,6 +18,10 @@ const userSchema = new Schema({
     textAns: {
         type: Map,
         of: String
+    },
+    dailyTextAns: {
+        type: Map,
+        of: Object
     }
 }, {timestamps: true}) //tracks when it was made and edited
 
