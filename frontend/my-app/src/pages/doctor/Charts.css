@@ -22,8 +22,9 @@
     display: flex;
     justify-content: flex-start;
     padding-top: 0px;
+    padding-bottom: 0px;
     margin-top: 0px;
-    min-height: 50vh;
+    min-height: 45vh;
 }
 
 /* Add to Charts.css */
@@ -41,4 +42,31 @@
   .tooltip.active {
     display: block;
   }
+
+  .scrolling-box-container {
+    display: flex;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    padding: 20px;
+    gap: 20px; /* Space between boxes */
+    min-height: 30vh;
+    width: 90%;
+}
+
+.scrolling-box {
+    flex: 0 0 200px; /* Flex basis of 200px, does not grow or shrink */
+    height: 150px; /* Fixed height */
+    background-color: #EDC8FF; /* Light gray background, change as needed */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Shadow for depth */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center;
+    cursor: pointer; 
+}
+
+.scrolling-box-header {
+    font-weight: bold;
+}
+
   

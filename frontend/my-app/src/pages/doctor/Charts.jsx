@@ -110,6 +110,28 @@ function Charts() {
         setIsModalOpen(!isModalOpen);
     };
 
+    const boxHeaders = [
+        'Integrated Thematic Analysis',
+        'Emotional and Thematic Interrelation',
+        'Subtle Shifts in Mood and Tone',
+        'Evolution of Self-Perception',
+        'Predictive Insights on Mental Health',
+        'Coping Strategy Effectiveness'
+    ];
+
+    const [isBoxModalOpen, setIsBoxModalOpen] = useState(false);
+    const [activeBoxIndex, setActiveBoxIndex] = useState(null);
+
+    const handleBoxClick = (index) => {
+        setActiveBoxIndex(index);
+        setIsBoxModalOpen(true);
+    };
+
+    const renderBoxModalContent = () => {
+        if (activeBoxIndex === null) return 'No box selected';
+        return `Information about Periodic Report ${activeBoxIndex + 1}`;
+    };
+
     return (
         <div>
             <button className="logout-button" onClick={handleLogout}>Back</button>
@@ -119,11 +141,25 @@ function Charts() {
                     <Pie data={pieData} />
                     <Line data={lineData1} />
                 </div>
+
+                <h2>Periodic Trends</h2>
+                <div className="scrolling-box-container">
+                {boxHeaders.map((header, index) => (
+                    <div key={index} className="scrolling-box" onClick={() => handleBoxClick(index)}>
+                        <h3 className="scrolling-box-header">{header}</h3>
+                    </div>
+                ))}
+            </div>
                 <h2>{user.firstName} {user.lastName}'s Daily Logs</h2>
                 <Calendar onChange={handleDayClick} value={value} className="custom-calendar" />
+
             </div>
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} userId={userId} theDate={selectedDay}>
                 <h2>Details for {selectedDay}</h2>
+            </Modal>
+            <Modal isOpen={isBoxModalOpen} onClose={() => setIsBoxModalOpen(false)}>
+                <h2>{activeBoxIndex >= 0 ? boxHeaders[activeBoxIndex] : 'No Box Selected'}</h2>
+                {/* You can add more content here, such as the details or logs of the selected box */}
             </Modal>
         </div>
     );
